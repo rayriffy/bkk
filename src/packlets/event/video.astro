@@ -1,5 +1,6 @@
 ---
 import type { youtube_v3 } from '@googleapis/youtube'
+import { Picture } from 'astro:assets'
 
 export interface Props {
   snippet: youtube_v3.Schema$PlaylistItemSnippet
@@ -7,7 +8,7 @@ export interface Props {
 
 const { resourceId, thumbnails, title } = Astro.props.snippet
 
-const thumbnail = thumbnails!.high!
+const thumbnail = thumbnails!.maxres!
 ---
 
 <a
@@ -16,10 +17,12 @@ const thumbnail = thumbnails!.high!
   rel="noopener noreferrer"
 >
   <article class="bg-js space-y-2 rounded-xl overflow-hidden">
-    <img
-      src={thumbnail.url}
-      width={thumbnail.width}
-      height={thumbnail.height}
+    <Picture
+      src={thumbnail.url!}
+      width={640}
+      height={360}
+      formats={['jpg', 'webp']}
+      alt="video thumbnail"
       loading="lazy"
       decoding="async"
       class="w-80 h-auto"
