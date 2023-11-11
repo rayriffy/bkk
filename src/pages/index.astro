@@ -2,49 +2,62 @@
 import { Picture } from 'astro:assets'
 
 import Blank from '$layout/blank.astro'
-import Playlist from '$archive/playlist.astro'
+import Playlist from '$event/playlist.astro'
 import BKKJS from '$icon/bkkjs.astro'
 import ExternalLink from '$icon/external-link.astro'
 
+import frontImage from '$assets/front.jpg'
 import stageImage from '$assets/stage.jpg'
-import { archives } from '$data'
+
+import { active, archives } from '$data'
+import Upcoming from '$event/upcoming.astro'
 ---
 
 <Blank class="space-y-8">
   <div class="relative">
-    <Picture src={stageImage} formats={['jpg', 'webp']} alt="" />
+    <Picture
+      src={stageImage}
+      class="object-cover h-96"
+      formats={['jpg', 'webp']}
+      alt="stage"
+    />
     <div
       class="absolute top-0 bottom-0 left-0 right-0 bg-black/60 flex flex-col items-center justify-center space-y-6"
     >
-      <div>
+      <div class="space-y-2">
         <BKKJS class="w-72 h-auto text-white overflow-hidden object-cover" />
         <h1 class="text-white">JavaScript meetups for Thai developers.</h1>
       </div>
-      <div class="px-2 max-w-xl w-full">
-        <div class="bg-white rounded-xl shadow px-8 py-6 space-y-2">
-          <!-- <h1 class="font-bold">Upcoming events</h1> -->
-          <div
-            class="sm:flex justify-between items-center space-y-4 sm:space-y-0"
-          >
-            <div class="flex items-end space-x-2 leading-none">
-              <BKKJS class="h-8" />
-              <span class="font-bold text-3xl -mb-1">#19</span>
-              <p class="text-xl leading-none sm:hidden">27 Jan 2024</p>
-            </div>
-            <p class="text-xl leading-none hidden sm:block">27 Jan 2024</p>
-            <button
-              type="button"
-              class="rounded-md bg-yellow-200 px-4 py-2 text-sm font-semibold text-yellow-950 hover:bg-yellow-100"
-            >
-              I want to speak!
-            </button>
-          </div>
-        </div>
-      </div>
+      {active && (
+        <Upcoming event={active} />
+      )}
     </div>
   </div>
   <div class="max-w-6xl mx-auto px-4 space-y-8">
-    <h1 class="text-5xl font-extrabold">Past Events</h1>
+    <h1 class="text-4xl sm:text-5xl font-extrabold">About</h1>
+    <div class="md:flex md:space-x-8 items-center">
+      <div class="max-w-[24rem] w-full flex-shrink-0 mx-auto">
+        <Picture
+          src={frontImage}
+          class="flex-shrink-0"
+          formats={['jpg', 'webp']}
+          alt="front"
+        />
+      </div>
+      <p class="pt-6 md:pt-0">
+        BKK.JS, the premier JavaScript meetup for Thai developers, invites you
+        to immerse yourself in the dynamic world of JavaScript through an
+        evening of enlightening talks by seasoned speakers. Join us for an
+        insightful event where experienced professionals share their expertise,
+        showcasing the latest and most innovative JavaScript technologies.
+        Whether you're a seasoned developer or just starting your journey with
+        JavaScript, BKK.JS offers a unique opportunity to connect, learn, and
+        stay ahead in the rapidly evolving world of web development. Come be a
+        part of the vibrant Thai JavaScript community and elevate your skills at
+        BKK.JS!
+      </p>
+    </div>
+    <h1 class="text-4xl sm:text-5xl font-extrabold">Past Events</h1>
     <div class="space-y-4">
       {
         archives.map(archive => (
@@ -57,6 +70,8 @@ import { archives } from '$data'
               <a
                 href={archive.links.event}
                 class="rounded-md bg-yellow-200 px-4 py-2 text-sm font-semibold text-yellow-950 hover:bg-yellow-100 inline-flex items-center leading-none"
+                target="_blank"
+                rel="noopener noreferrer"
               >
                 Event <ExternalLink class="w-4 h-4 ml-1" />
               </a>

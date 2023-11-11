@@ -1,0 +1,34 @@
+---
+import { clsx } from 'clsx'
+
+import BKKJS from '$icon/bkkjs.astro'
+
+import type { Active } from '$data/types'
+
+export interface Props extends astroHTML.JSX.HTMLAttributes {
+  event: NonNullable<Active>
+}
+
+const { event, class: className, ...rest } = Astro.props
+
+const stringifiedDate = event.date.format('YY MMM YYYY')
+---
+
+<div class={clsx('px-2 max-w-xl w-full', className)} {...rest}>
+  <div class="bg-white rounded-xl shadow px-8 py-6 space-y-2">
+    <div class="sm:flex justify-between items-center space-y-4 sm:space-y-0">
+      <div class="flex items-end space-x-2 leading-none">
+        <BKKJS class="h-8" />
+        <span class="font-bold text-3xl -mb-1">#{event.number}</span>
+        <p class="text-xl leading-none sm:hidden">{stringifiedDate}</p>
+      </div>
+      <p class="text-xl leading-none hidden sm:block">{stringifiedDate}</p>
+      <button
+        type="button"
+        class="rounded-md bg-yellow-200 px-4 py-2 text-sm font-semibold text-yellow-950 hover:bg-yellow-100"
+      >
+        I want to speak!
+      </button>
+    </div>
+  </div>
+</div>
