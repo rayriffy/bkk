@@ -31,6 +31,12 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 20
+      - name: creds
+        run: |
+          mkdir -p .data
+          echo "$GOOGLE_CLIENT_JSON" > .data/google_client_secret.json
+        env:
+          GOOGLE_CLIENT_JSON: ${{ secrets.GOOGLE_CLIENT_JSON }}
       - name: install
         run: pnpm -r i --frozen-lockfile
       - name: build
