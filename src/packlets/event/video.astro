@@ -6,6 +6,8 @@ export interface Props {
 }
 
 const { resourceId, thumbnails, title } = Astro.props.snippet
+
+const thumbnail = thumbnails!.high!
 ---
 
 <a
@@ -15,9 +17,9 @@ const { resourceId, thumbnails, title } = Astro.props.snippet
 >
   <article class="bg-js space-y-2 rounded-xl overflow-hidden">
     <img
-      src={thumbnails?.medium?.url}
-      width={thumbnails?.medium?.width}
-      height={thumbnails?.medium?.height}
+      src={thumbnail.url}
+      width={thumbnail.width}
+      height={thumbnail.height}
       loading="lazy"
       decoding="async"
       class="w-80 h-auto"
