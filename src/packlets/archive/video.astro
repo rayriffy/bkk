@@ -1,0 +1,31 @@
+---
+import type { youtube_v3 } from '@googleapis/youtube'
+
+export interface Props {
+  snippet: youtube_v3.Schema$PlaylistItemSnippet
+}
+
+const { resourceId, thumbnails, title } = Astro.props.snippet
+---
+
+<a
+  href={`https://youtu.be/` + resourceId?.videoId}
+  target="_blank"
+  rel="noopener noreferrer"
+>
+  <article class="bg-js space-y-2 rounded-xl overflow-hidden">
+    <img
+      src={thumbnails?.medium?.url}
+      width={thumbnails?.medium?.width}
+      height={thumbnails?.medium?.height}
+      loading="lazy"
+      decoding="async"
+      class="w-80 h-auto"
+    />
+    <div class="px-4 pt-2 pb-4">
+      <h1 class="line-clamp-2 w-72 font-semibold leading-tight">
+        {title}
+      </h1>
+    </div>
+  </article>
+</a>

@@ -1,0 +1,49 @@
+---
+import youtube from '@googleapis/youtube'
+
+import Video from './video.astro'
+
+export interface Props {
+  playlistId: string
+}
+
+const { playlistId } = Astro.props
+
+const auth = new youtube.auth.GoogleAuth({
+  keyFilename: '.data/google_client_secret.json',
+  scopes: [
+    'https://www.googleapis.com/auth/youtube',
+    'https://www.googleapis.com/auth/youtube.force-ssl',
+  ],
+})
+const youtubeClient = await youtube.youtube({
+  version: 'v3',
+  auth: auth,
+})
+
+const playlist = await youtubeClient.playlistItems.list({
+  part: ['snippet'],
+  playlistId,
+  maxResults: 50,
+})
+---
+
+<section class="bg-yellow-50 py-4 flex overflow-x-scroll space-x-4 rounded-xl">
+  {
+    (playlist.data.items ?? []).map(item => (
+      <div class="flex-shrink-0 first:pl-4 last:pr-4">
+        <Video snippet={item.snippet!} />
+      </div>
+    ))
+  }
+</section>
+
+<style>
+  section {
+    scrollbar-width: none;
+  }
+
+  section::-webkit-scrollbar {
+    display: none;
+  }
+</style>
