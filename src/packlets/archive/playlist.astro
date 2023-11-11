@@ -9,16 +9,15 @@ export interface Props {
 
 const { playlistId } = Astro.props
 
-const auth = new youtube.auth.GoogleAuth({
-  keyFilename: '.data/google_client_secret.json',
-  scopes: [
-    'https://www.googleapis.com/auth/youtube',
-    'https://www.googleapis.com/auth/youtube.force-ssl',
-  ],
-})
-const youtubeClient = await youtube.youtube({
+const youtubeClient = youtube.youtube({
   version: 'v3',
-  auth: auth,
+  auth: new youtube.auth.GoogleAuth({
+    keyFilename: '.data/google_client_secret.json',
+    scopes: [
+      'https://www.googleapis.com/auth/youtube',
+      'https://www.googleapis.com/auth/youtube.force-ssl',
+    ],
+  }),
 })
 
 const playlist = await youtubeClient.playlistItems.list({
