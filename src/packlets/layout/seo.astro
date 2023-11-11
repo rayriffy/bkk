@@ -10,8 +10,8 @@ export interface Props {
 
 const {
   title,
-  description,
-  image = '/cover.jpg',
+  description = 'JavaScript meetups for Thai developers.',
+  image = '/og.jpg',
   noindex = false,
 } = Astro.props
 const transformedTitle = title ? `${title} · BKK.JS` : 'BKK.JS'
