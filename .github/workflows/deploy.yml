@@ -35,14 +35,7 @@ jobs:
         run: pnpm -r i --frozen-lockfile
       - name: build
         run: pnpm build
-      # - name: configure
-      #   uses: actions/configure-pages@v3
-      # - name: upload
-      #   uses: actions/upload-pages-artifact@v1
-      #   with:
-      #     path: dist
-      # - name: deploy
-      #   id: deployment
-      #   uses: actions/deploy-pages@v2
-      # - name: 'logging'
-      #   run: echo "Deployed at ${{ steps.deployment.outputs.page_url }}"
+      - name: deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: dist
