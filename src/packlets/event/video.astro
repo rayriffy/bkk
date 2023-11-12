@@ -6,13 +6,20 @@ export interface Props {
   snippet: youtube_v3.Schema$PlaylistItemSnippet
 }
 
-const { resourceId, thumbnails, title } = Astro.props.snippet
+const { resourceId, thumbnails, title, playlistId } = Astro.props.snippet
 
 const thumbnail = thumbnails!.maxres!
 ---
 
 <a
-  href={`https://youtu.be/` + resourceId?.videoId}
+  href={`https://youtu.be/` +
+    resourceId?.videoId +
+    '?' +
+    new URLSearchParams({
+      list: playlistId!,
+      utm_source: 'bkk.js.org',
+      utm_medium: 'referral',
+    }).toString()}
   target="_blank"
   rel="noopener noreferrer"
 >
