@@ -1,0 +1,47 @@
+---
+export type Props = astroHTML.JSX.SVGAttributes
+
+const { props } = Astro
+---
+
+<svg
+  width="300"
+  height="300"
+  viewBox="0 0 300 300"
+  fill="none"
+  xmlns="http://www.w3.org/2000/svg"
+  {...props}
+>
+  <mask
+    id="mask0_203_45"
+    style="mask-type:alpha"
+    maskUnits="userSpaceOnUse"
+    x="1"
+    y="0"
+    width="299"
+    height="299"
+  >
+    <path
+      d="M207.501 108.164H191.899V92.5611L150.704 51.3677L109.511 92.5611V108.164H93.9134L52.72 149.352L93.9134 190.546H109.511V206.149L150.704 247.343L191.899 206.149V190.546H207.501L248.688 149.352L207.501 108.164Z"
+      fill="black"></path>
+    <path
+      d="M150.562 298.706L85.529 233.672V214.385H66.2424L1.20923 149.353L66.2424 84.3199H85.529V65.0331L150.562 0L215.596 65.0331V84.3199H234.882L299.915 149.353L234.882 214.385H215.596V233.672L150.562 298.706ZM96.6069 229.087L150.562 283.041L204.518 229.087V203.307H230.296L284.252 149.353L230.296 95.3978H204.518V69.6194L150.562 15.6643L96.6069 69.6194V95.3978H70.8285L16.8734 149.353L70.8285 203.307H96.6069V229.087Z"
+      fill="black"></path>
+  </mask>
+  <g mask="url(#mask0_203_45)">
+    <rect width="300" height="300" fill="url(#paint0_linear_203_45)"></rect>
+  </g>
+  <defs>
+    <linearGradient
+      id="paint0_linear_203_45"
+      x1="0"
+      y1="0"
+      x2="300"
+      y2="300"
+      gradientUnits="userSpaceOnUse"
+    >
+      <stop offset="0.0520833" stop-color="#DE726F"></stop>
+      <stop offset="0.928925" stop-color="#2254B6"></stop>
+    </linearGradient>
+  </defs>
+</svg>

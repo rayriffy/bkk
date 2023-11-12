@@ -1,6 +1,9 @@
 ---
-import type { youtube_v3 } from '@googleapis/youtube'
 import { Picture } from 'astro:assets'
+
+import ExternalLink from '$common/externalLink.astro'
+
+import type { youtube_v3 } from '@googleapis/youtube'
 
 export interface Props {
   snippet: youtube_v3.Schema$PlaylistItemSnippet
@@ -11,7 +14,7 @@ const { resourceId, thumbnails, title, playlistId } = Astro.props.snippet
 const thumbnail = thumbnails!.maxres!
 ---
 
-<a
+<ExternalLink
   href={`https://youtu.be/` +
     resourceId?.videoId +
     '?' +
@@ -20,8 +23,6 @@ const thumbnail = thumbnails!.maxres!
       utm_source: 'bkk.js.org',
       utm_medium: 'referral',
     }).toString()}
-  target="_blank"
-  rel="noopener noreferrer"
 >
   <article class="bg-js space-y-2 rounded-xl overflow-hidden">
     <Picture
@@ -40,4 +41,4 @@ const thumbnail = thumbnails!.maxres!
       </h1>
     </div>
   </article>
-</a>
+</ExternalLink>

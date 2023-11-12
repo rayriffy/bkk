@@ -1,20 +1,23 @@
 ---
 import { Picture } from 'astro:assets'
 
+import ExternalLink from '$common/externalLink.astro'
 import Blank from '$layout/blank.astro'
 import Playlist from '$event/playlist.astro'
-import BKKJS from '$icon/bkkjs.astro'
-import ExternalLink from '$icon/external-link.astro'
+import Upcoming from '$event/upcoming.astro'
+
+import BKKJSIcon from '$icon/bkkjs.astro'
+import ExternalLinkIcon from '$icon/externalLink.astro'
+import JSBKKIcon from '$icon/jsbkk.astro'
 
 import frontImage from '$assets/front.jpg'
 import stageImage from '$assets/stage.jpg'
 
 import { active, archives } from '$data'
-import Upcoming from '$event/upcoming.astro'
 ---
 
-<Blank class="space-y-8">
-  <div class="relative">
+<Blank>
+  <div class="relative z-10">
     <Picture
       src={stageImage}
       class="object-cover h-96"
@@ -25,15 +28,23 @@ import Upcoming from '$event/upcoming.astro'
       class="absolute top-0 bottom-0 left-0 right-0 bg-black/60 flex flex-col items-center justify-center space-y-6"
     >
       <div class="space-y-2">
-        <BKKJS class="w-72 h-auto text-white overflow-hidden object-cover" />
+        <BKKJSIcon
+          class="w-72 h-auto text-white overflow-hidden object-cover"
+        />
         <h1 class="text-white">JavaScript meetups for Thai developers.</h1>
       </div>
-      {active && (
-        <Upcoming event={active} />
-      )}
+      {active && <Upcoming event={active} />}
     </div>
   </div>
-  <div class="max-w-6xl mx-auto px-4 space-y-8">
+  <div class="relative max-w-6xl mx-auto px-4 space-y-8 overflow-hidden">
+    <div class="absolute -top-20 sm:-top-32 right-4 sm:right-0 group">
+      <JSBKKIcon class="w-32 sm:w-48 h-32 sm:h-48 rotate-12" />
+      <span
+        class="opacity-0 group-hover:opacity-100 transition-opacity select-none absolute -bottom-6 text-white bg-neutral-800 text-xs font-mono px-2 py-0.5 rounded left-1/3"
+      >
+        ???
+      </span>
+    </div>
     <h1 class="text-4xl sm:text-5xl font-extrabold">About</h1>
     <div class="md:flex md:space-x-8 items-center">
       <div class="max-w-[24rem] w-full flex-shrink-0 mx-auto">
@@ -64,17 +75,15 @@ import Upcoming from '$event/upcoming.astro'
           <>
             <div class="flex justify-between">
               <div class="flex items-end space-x-2 leading-none">
-                <BKKJS class="h-8" />
+                <BKKJSIcon class="h-8" />
                 <span class="font-bold text-3xl -mb-1">#{archive.number}</span>
               </div>
-              <a
+              <ExternalLink
                 href={archive.links.event}
                 class="rounded-md bg-yellow-200 px-4 py-2 text-sm font-semibold text-yellow-950 hover:bg-yellow-100 inline-flex items-center leading-none"
-                target="_blank"
-                rel="noopener noreferrer"
               >
-                Event <ExternalLink class="w-4 h-4 ml-1" />
-              </a>
+                Event <ExternalLinkIcon class="w-4 h-4 ml-1" />
+              </ExternalLink>
             </div>
             <Playlist playlistId={archive.links.playlistId} />
           </>
