@@ -1,6 +1,7 @@
 ---
 import SEO from './seo.astro'
 import Footer from './footer.astro'
+import Analytics from './analytics.astro'
 
 import './blank.css'
 
@@ -32,5 +33,6 @@ const { props } = Astro
     </main>
     <slot name="below-main" />
     <Footer />
+    <Analytics />
   </body>
 </html>
