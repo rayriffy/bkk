@@ -5,7 +5,10 @@ export type Active = null | {
   date: Dayjs
   links: {
     event?: string
-    cfp?: string
+    cfp?: {
+      link: string
+      until: Dayjs
+    }
   }
 }
 

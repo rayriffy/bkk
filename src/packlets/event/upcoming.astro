@@ -12,6 +12,9 @@ export interface Props extends astroHTML.JSX.HTMLAttributes {
 const { event, class: className, ...rest } = Astro.props
 
 const stringifiedDate = event.date.format('YY MMM YYYY')
+
+const shouldShowCFP =
+  event.links.cfp && event.links.cfp.until.endOf('day').isBefore(new Date())
 ---
 
 <div class={clsx('px-2 max-w-xl w-full', className)} {...rest}>
@@ -23,12 +26,23 @@ const stringifiedDate = event.date.format('YY MMM YYYY')
         <p class="text-xl leading-none sm:hidden">{stringifiedDate}</p>
       </div>
       <p class="text-xl leading-none hidden sm:block">{stringifiedDate}</p>
-      <button
-        type="button"
-        class="rounded-md bg-yellow-200 px-4 py-2 text-sm font-semibold text-yellow-950 hover:bg-yellow-100"
-      >
-        I want to speak!
-      </button>
+      {
+        shouldShowCFP ? (
+          <a
+            href={event.links.cfp!.link}
+            class="rounded-md bg-yellow-200 px-4 py-2 text-sm font-semibold text-yellow-950 hover:bg-yellow-100"
+          >
+            I want to speak!
+          </a>
+        ) : (
+          <a
+            href={event.links.event}
+            class="rounded-md bg-yellow-200 px-4 py-2 text-sm font-semibold text-yellow-950 hover:bg-yellow-100"
+          >
+            I want to join!
+          </a>
+        )
+      }
     </div>
   </div>
 </div>
