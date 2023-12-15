@@ -33,7 +33,7 @@ import { active, archives } from '$data'
         />
         <h1 class="text-white">JavaScript meetups for Thai developers.</h1>
       </div>
-      {active && <Upcoming event={active} />}
+      {active && active.date.endOf('day').isAfter(new Date()) && <Upcoming event={active} />}
     </div>
   </div>
   <div class="relative max-w-6xl mx-auto px-4 space-y-8 overflow-hidden">
