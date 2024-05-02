@@ -11,7 +11,7 @@ export interface Props extends astroHTML.JSX.HTMLAttributes {
 
 const { event, class: className, ...rest } = Astro.props
 
-const stringifiedDate = event.date.format('YY MMM YYYY')
+const stringifiedDate = event.date.format('DD MMM YYYY')
 
 const shouldShowCFP =
   event.links.cfp && event.links.cfp.until.endOf('day').isBefore(new Date())
