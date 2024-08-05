@@ -26,11 +26,11 @@ jobs:
       - name: pnpm
         uses: pnpm/action-setup@v2
         with:
-          version: 8
+          version: 9
       - name: node
         uses: actions/setup-node@v3
         with:
-          node-version: 20
+          node-version: 22
       - name: creds
         run: |
           mkdir -p .data
