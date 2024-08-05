@@ -3,19 +3,16 @@ import dayjs from 'dayjs'
 import { bkkjs17 } from './archive/17'
 import { bkkjs18 } from './archive/18'
 import { bkkjs19 } from './archive/19'
+import { bkkjs20 } from './archive/20'
 
 import type { Active, Archive } from './types'
 
 export const active: Active = {
-  number: 20,
-  date: dayjs('2024-05-18'),
+  number: 21,
+  date: dayjs('2024-08-31'),
   links: {
-    cfp: {
-      link: 'https://www.eventpop.me/events/26956-bkkjs20/application_forms/1844/applicants/new',
-      until: dayjs('2024-04-30'),
-    },
-    event: 'https://www.eventpop.me/e/26956/bkkjs20',
-  },
+    event: 'https://www.eventpop.me/e/48968'
+  }
 }
 
-export const archives: Archive[] = [bkkjs19, bkkjs18, bkkjs17]
+export const archives: Archive[] = [bkkjs20, bkkjs19, bkkjs18, bkkjs17]
