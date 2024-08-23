@@ -9,7 +9,7 @@ import type { Active, Archive } from './types'
 
 export const active: Active = {
   number: 21,
-  date: dayjs('2024-08-31'),
+  date: dayjs('2024-09-14'),
   links: {
     event: 'https://www.eventpop.me/e/48968'
   }
