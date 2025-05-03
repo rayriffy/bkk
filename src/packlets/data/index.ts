@@ -5,6 +5,7 @@ import { bkkjs18 } from './archive/18'
 import { bkkjs19 } from './archive/19'
 import { bkkjs20 } from './archive/20'
 import { bkkjs21 } from './archive/21'
+import { bkkjs22 } from './archive/22'
 
 import type { Active, Archive } from './types'
 
@@ -17,4 +18,4 @@ export const active: Active = null
 //   }
 // }
 
-export const archives: Archive[] = [bkkjs21, bkkjs20, bkkjs19, bkkjs18, bkkjs17]
+export const archives: Archive[] = [bkkjs22, bkkjs21, bkkjs20, bkkjs19, bkkjs18, bkkjs17]
