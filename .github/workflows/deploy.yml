@@ -3,23 +3,19 @@ name: Deployment
 on:
   push:
     branches: [main]
+  pull_request:
   workflow_dispatch:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
   group: pages
   cancel-in-progress: false
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
-    environment:
-      name: Production
-      url: https://bkk.js.org
     steps:
       - name: checkout
         uses: actions/checkout@v4
@@ -32,6 +28,7 @@ jobs:
         with:
           node-version: 22
       - name: creds
+        if: ${{ secrets.GOOGLE_CLIENT_JSON != '' }}
         run: |
           mkdir -p .data
           echo "$GOOGLE_CLIENT_JSON" > .data/google_client_secret.json
@@ -41,6 +38,30 @@ jobs:
         run: pnpm -r i --frozen-lockfile
       - name: build
         run: pnpm build
+      - name: upload build artifact
+        if: ${{ github.event_name != 'pull_request' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-dist
+          path: dist
+
+  deploy:
+    if: ${{ github.event_name != 'pull_request' }}
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: Production
+      url: https://bkk.js.org
+    steps:
+      - name: download build artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: site-dist
+          path: dist
       - name: configure
         uses: actions/configure-pages@v5
       - name: upload
