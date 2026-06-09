@@ -9,22 +9,23 @@ export interface Props {
 
 const { playlistId } = Astro.props
 
-const youtubeClient = youtube.youtube({
-  version: 'v3',
-  auth: new youtube.auth.GoogleAuth({
-    keyFilename: '.data/google_client_secret.json',
-    scopes: [
-      'https://www.googleapis.com/auth/youtube',
-      'https://www.googleapis.com/auth/youtube.force-ssl',
-    ],
-  }),
-})
-
-const playlist = await youtubeClient.playlistItems.list({
-  part: ['snippet'],
-  playlistId,
-  maxResults: 50,
-})
+const playlist = await youtube
+  .youtube({
+    version: 'v3',
+    auth: new youtube.auth.GoogleAuth({
+      keyFilename: '.data/google_client_secret.json',
+      scopes: [
+        'https://www.googleapis.com/auth/youtube',
+        'https://www.googleapis.com/auth/youtube.force-ssl',
+      ],
+    }),
+  })
+  .playlistItems.list({
+    part: ['snippet'],
+    playlistId,
+    maxResults: 50,
+  })
+  .catch(() => ({ data: { items: [] } }))
 ---
 
 <section class="bg-yellow-50 py-4 flex overflow-x-scroll space-x-4 rounded-xl">
